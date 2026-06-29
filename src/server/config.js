@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import '../database/db.js'
 
 export default class Server{
     constructor(){
@@ -21,7 +22,7 @@ export default class Server{
     // configurar un archivo estatico como pagina principal
     this.app.use(express.static(__dirname + "/../../public"));
   }
-  
+
     listen() {
     this.app.listen(this.PORT, () => {
       console.info(`Servidor activo en http://localhost:${this.PORT}`);
