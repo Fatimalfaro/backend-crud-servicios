@@ -1,0 +1,15 @@
+{
+  "name": "13-backend-crud-servicios",
+  "version": "1.0.0",
+  "description": "Backend del crud de servicios de programación",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "node --watch index"
+  },
+  "keywords": ["middlewares", "models", "documentos", "endpoint"],
+  "author": "Alfaro Fátima",
+  "license": "ISC",
+  "packageManager": "pnpm@11.5.2",
+  "type": "module"
+}
