@@ -1,3 +1,5 @@
+import Servicio from "../models/servicio.js"
+
 export const prueba = (req, res)=>{
     const vehiculos = ['🚗','🚓','🚕']
 
@@ -5,4 +7,17 @@ export const prueba = (req, res)=>{
         mensaje: 'Bienvenido a mi backend',
         vehiculos
     })
+}
+
+export const crearServicio = async (req, res)=>{
+    try{
+        //luego agregamos la validacion 
+       const servicioNuevo = new Servicio(req.body)
+       await servicioNuevo.save()
+       //ahora doy de alta en la bd
+       res.status(201).json({mensaje: 'El servicio fue creado correctamente'})
+    }catch(error){
+        console.error(error)
+        res.status(500).json({mensaje: 'Ocurrio un error al intentar crear un servicio'})
+    }
 }
