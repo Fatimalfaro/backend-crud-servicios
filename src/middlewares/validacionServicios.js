@@ -1,5 +1,6 @@
 import { body, param } from "express-validator";
 import resultadoValidacion from "./resultadosValidacion.js";
+import Servicio from "../models/servicio.js";
 
 
 const reglasServicio = [
@@ -7,7 +8,15 @@ const reglasServicio = [
     .isString()
     .withMessage('El nombre del servicio debe ser un string')
     .isLength({min: 5, max: 100})
-    .withMessage('El nombre del servicio debe tener entre 5 y 100 caracteres'),
+    .withMessage('El nombre del servicio debe tener entre 5 y 100 caracteres')
+    .custom(async (valor, {req}) => {
+        const servicioExistente = await Servicio.findOne({nombreServicio: valor}) 
+        if (!servicioExistente) {
+           return true
+        }
+        throw new Error('El nombre del servicio ya existe en la base de datos')
+    })
+    ,
 
 
     body('precio')
