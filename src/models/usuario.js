@@ -44,3 +44,26 @@ const usuarioSchema = new Schema({
   {
     timestamps: true,
   });
+
+usuarioSchema.pre("save", async function () {
+  const usuario = this;
+  //si el password no fue modificado
+  if(!usuario.isModified("password")) return;
+  
+  //hassheamos el password
+  try{
+
+    const salt = await bcrypt.genSalt(10)
+    usuario.password = await bcrypt.hash(usuario.password, salt)
+
+  }catch(error){
+    console.error(error)
+    throw error
+
+  }
+  
+})
+
+const Usuario = moongose.model("Usuario", usuarioSchema)
+
+export default Usuario;
