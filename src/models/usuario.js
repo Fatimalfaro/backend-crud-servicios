@@ -1,4 +1,5 @@
 import moongose, {Schema} from "mongoose";
+import bcrypt from "bcryptjs";
 
 const usuarioSchema = new Schema({
      nombre: {
